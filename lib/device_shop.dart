@@ -1,40 +1,51 @@
+import 'package:device_shop/drawerMenu/drawer.dart';
+import 'package:device_shop/texts/app_images.dart';
+import 'package:device_shop/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
-class DeviceShop extends StatefulWidget {
+class DeviceShop extends StatelessWidget {
   const DeviceShop({Key? key}) : super(key: key);
 
   @override
-  State<DeviceShop> createState() => _DeviceShop();
-}
-
-class _DeviceShop extends State<DeviceShop> {
-  @override
-  Widget build(BuildContext buildContext) {
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: const MainDrawer(),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white60,
           title: const Text(
-            'device shop',
+            AppText.nameOfApp,
             style: TextStyle(fontSize: 24, color: Colors.purple),
           ),
         ),
         body: ListView(
-          children: const [
-            IconList(),
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 30,
             ),
-            searchString(),
-            SizedBox(
+            const searchString(),
+            const SizedBox(
               height: 48,
             ),
-            CatalogOfProducts(),
-            SizedBox(
+            Container(
+              height: 200,
+              width: 150,
+              child: const Expanded(child: CatalogOfProducts()),
+            ),
+            const SizedBox(
               height: 67,
             ),
-            OftenBuyCatalog(),
+            const OftenBuyRowWidget(),
+            const SizedBox(
+              height: 20,
+            ),
+            const OftenBuyCatalog(),
+            const DiscountRowWidget(),
+            const SizedBox(
+              height: 20,
+            ),
+            const DiscountCatalog(),
           ],
         ),
       ),
@@ -55,6 +66,51 @@ class IconList extends StatelessWidget {
   }
 }
 
+class OftenBuyRowWidget extends StatelessWidget {
+  const OftenBuyRowWidget({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 5),
+          child: const Icon(Icons.local_fire_department),
+        ),
+        Container(
+          padding: const EdgeInsets.only(
+            left: 15,
+          ),
+          child: const Text(AppText.nameOfFrequentlyPurchasedCatalog),
+        ),
+      ],
+    );
+  }
+}
+
+class DiscountRowWidget extends StatelessWidget {
+  const DiscountRowWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 5),
+          child: const Icon(Icons.percent),
+        ),
+        Container(
+          padding: const EdgeInsets.only(
+            left: 15,
+          ),
+          child: const Text(AppText.nameOfDiscountCatalog),
+        ),
+      ],
+    );
+  }
+}
+
 class searchString extends StatelessWidget {
   const searchString({super.key});
 
@@ -63,18 +119,20 @@ class searchString extends StatelessWidget {
     return Row(
       children: [
         Container(
+          height: 30,
           color: Colors.grey,
           child: const Icon(Icons.search),
         ),
         Container(
           padding: const EdgeInsets.only(left: 20.0),
-          alignment: Alignment.topLeft,
+          alignment: Alignment.topCenter,
           width: 365,
-          height: 24,
+          height: 30,
           color: Colors.grey,
-          child: const Text(
-            'Поиск в каталоге',
-            style: TextStyle(fontSize: 16, color: Colors.white),
+          child: const TextField(
+            decoration: InputDecoration(
+              hintText: AppText.searchInCatalog,
+            ),
           ),
         ),
       ],
@@ -84,38 +142,36 @@ class searchString extends StatelessWidget {
 
 class WidgetProduct extends StatelessWidget {
   final String nameOfProduct;
-  late final double padding;
-  late final String nameOfImage;
-  late final double widthOfContainer;
-  late final double heightOfContainer;
+  final String nameOfImage;
+  final double widthOfContainerText;
+  final double heightOfContainerText;
 
   WidgetProduct({
     super.key,
     required this.nameOfProduct,
-    required this.padding,
     required this.nameOfImage,
-    required this.heightOfContainer,
-    required this.widthOfContainer,
+    required this.heightOfContainerText,
+    required this.widthOfContainerText,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             nameOfImage,
-            height: 56,
-            width: 56,
+            height: 50.89,
+            width: 50,
           ),
           Container(
-            padding: EdgeInsets.only(left: padding),
-            height: heightOfContainer,
-            width: widthOfContainer,
+            height: heightOfContainerText,
+            width: widthOfContainerText,
             child: Text(
               nameOfProduct,
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12),
             ),
           ),
@@ -130,109 +186,21 @@ class OftenBuyCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 37),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            children: [
-              Icon(Icons.local_fire_department),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                'Часто покупают',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              WidgetProduct(
-                heightOfContainer: 155,
-                widthOfContainer: 60,
-                nameOfProduct:
-                    'Смартфон Samsung Galaxy S23 Ultra SM-S918B/DS 12GB/512GB',
-                padding: 2,
-                nameOfImage: 'assets/imagesoften/phoneOften.jpg',
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              WidgetProduct(
-                heightOfContainer: 130,
-                widthOfContainer: 60,
-                nameOfProduct: 'SHURE PGA48-XLR-E МИКРОФОН',
-                padding: 12,
-                nameOfImage: 'assets/imagesoften/microphoneOften.jpg',
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              WidgetProduct(
-                heightOfContainer: 130,
-                widthOfContainer: 60,
-                nameOfProduct: 'Игровая приставка Game Box G11 Pro',
-                padding: 0,
-                nameOfImage: 'assets/imagesoften/playstationOften.jpg',
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Row(
-            children: [
-              Icon(Icons.percent),
-              SizedBox(
-                width: 5,
-              ),
-              Text('Товар на скидках'),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            children: [
-              WidgetProduct(
-                heightOfContainer: 130,
-                widthOfContainer: 60,
-                nameOfProduct: 'Пылесос бытовой NORMANN AVC-516 ',
-                padding: 3,
-                nameOfImage:
-                    'assets/imagesdiscounts/vacuumcleanerDiscounts.jpg',
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              WidgetProduct(
-                heightOfContainer: 130,
-                widthOfContainer: 60,
-                nameOfProduct: 'NVIDIA GM107-400-A2 GTX750TI RB',
-                padding: 3,
-                nameOfImage: 'assets/imagesdiscounts/videocardDiscounts.jpg',
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              WidgetProduct(
-                heightOfContainer: 130,
-                widthOfContainer: 60,
-                nameOfProduct: 'Беспроводные наушники Awei T29, черные',
-                padding: 0,
-                nameOfImage: 'assets/imagesdiscounts/headphonesDiscounts.jpg',
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: listOFWidgetProductOftenBuy,
+    );
+  }
+}
+
+class DiscountCatalog extends StatelessWidget {
+  const DiscountCatalog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: listOFWidgetOfDiscountProduct,
     );
   }
 }
@@ -242,94 +210,38 @@ class CatalogOfProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Ноутбуки',
-              padding: 3,
-              nameOfImage: 'assets/imagesmain/laptopMain.png',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Игровые приставки',
-              padding: 7,
-              nameOfImage: 'assets/imagesmain/playstationMain.jpg',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer:70,
-              nameOfProduct: 'Смартфоны',
-              padding: 0,
-              nameOfImage: 'assets/imagesmain/phoneMain.jpg',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Наушники',
-              padding: 0,
-              nameOfImage: 'assets/imagesmain/headphonesMain.jpg',
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 33,
-        ),
-        Row(
-          children: [
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Телевизоры',
-              padding: 0,
-              nameOfImage: 'assets/imagesmain/TVMain.jpg',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Пылесосы',
-              padding: 3,
-              nameOfImage: 'assets/imagesmain/vacuumcleanerMain.jpg',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Видеокарты',
-              padding: 0,
-              nameOfImage: 'assets/imagesmain/videocardMain.jpg',
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            WidgetProduct(
-              heightOfContainer: 30,
-              widthOfContainer: 70,
-              nameOfProduct: 'Микрофоны',
-              padding: 0,
-              nameOfImage: 'assets/imagesmain/micMain.jpg',
-            ),
-          ],
-        ),
-      ],
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 4,
+        mainAxisSpacing: 2, // Отступы по оси X
+        crossAxisSpacing: 3, // Отступы по оси Y
+      ),
+      itemCount: 8,
+      itemBuilder: (BuildContext context, int index) {
+        return WidgetProduct(
+          nameOfProduct: AppText.listOfNameProductChapter[index],
+          nameOfImage: AppImages.listOfImagesNameMain[index],
+          heightOfContainerText: 28,
+          widthOfContainerText: 90,
+        );
+      },
     );
   }
 }
+
+List<Widget> listOFWidgetProductOftenBuy = List.generate(
+  3,
+  (index) => WidgetProduct(
+      nameOfProduct: AppText.listOfNameFrequentlyPurchased[index],
+      nameOfImage: AppImages.listOFImagesNameOften[index],
+      heightOfContainerText: 130,
+      widthOfContainerText: 65),
+);
+List<Widget> listOFWidgetOfDiscountProduct = List.generate(
+  3,
+  (index) => WidgetProduct(
+      nameOfProduct: AppText.listOfNameOfDiscount[index],
+      nameOfImage: AppImages.listOfImagesDiscountsMain[index],
+      heightOfContainerText: 130,
+      widthOfContainerText: 65),
+);
