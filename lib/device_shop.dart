@@ -138,9 +138,12 @@ class OftenBuyCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: listOFWidgetProductOftenBuy,
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.23,right: 16.23),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: listOFWidgetProductOftenBuy,
+      ),
     );
   }
 }
@@ -150,9 +153,12 @@ class DiscountCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: listOFWidgetOfDiscountProduct,
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.23,right: 16.23),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: listOFWidgetOfDiscountProduct,
+      ),
     );
   }
 }
