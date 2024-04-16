@@ -31,7 +31,7 @@ class DeviceShop extends StatelessWidget {
               child: Expanded(child: CatalogOfProducts()),
             ),
             SizedBox(
-              height: 67,
+              height: 30,
             ),
             CatalogRowWidget(
               icon: Icons.local_fire_department,
@@ -41,9 +41,6 @@ class DeviceShop extends StatelessWidget {
             CatalogRowWidget(
               icon: Icons.percent,
               catalogName: AppText.nameOfDiscountCatalog,
-            ),
-            SizedBox(
-              height: 20,
             ),
             DiscountCatalog(),
           ],
@@ -139,7 +136,7 @@ class OftenBuyCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.23,right: 16.23),
+      padding: const EdgeInsets.only(left: 16.23,right: 16.23,top:20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: listOFWidgetProductOftenBuy,
@@ -154,7 +151,7 @@ class DiscountCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.23,right: 16.23),
+      padding: const EdgeInsets.only(left: 16.23,right: 16.23,top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: listOFWidgetOfDiscountProduct,
