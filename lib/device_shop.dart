@@ -9,13 +9,14 @@ class DeviceShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: const MainDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white60,
+        backgroundColor: Colors.white,
         title: const Text(
           AppText.nameOfApp,
-          style: TextStyle(fontSize: 24, color: Colors.purple),
+          style: TextStyle(fontSize: 24, color: Color(0xFFAB1CAE)),
         ),
       ),
       body: Column(
@@ -77,14 +78,14 @@ class SearchString extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(left: 10),
           height: 24,
-          color: Colors.grey,
+          color: const Color(0xFFD9D9D9),
           child: const Icon(Icons.search),
         ),
         Container(
           padding: const EdgeInsets.only(left: 20),
           width: 331,
           height: 24,
-          color: Colors.grey,
+          color: const Color(0xFFD9D9D9),
           child: const TextField(
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
@@ -125,10 +126,13 @@ class WidgetProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(
-          imageName,
-          height: imageHeight,
-          width: imageWidth,
+        Container(
+          color:Colors.white,
+          child: Image.asset(
+            imageName,
+            height: imageHeight,
+            width: imageWidth,
+          ),
         ),
         SizedBox(
           height: containerTextHeight,
