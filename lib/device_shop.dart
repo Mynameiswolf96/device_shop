@@ -13,7 +13,7 @@ class DeviceShop extends StatelessWidget {
       drawer: const MainDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFFFFFFF),
         title: const Text(
           AppText.nameOfApp,
           style: TextStyle(fontSize: 24, color: Color(0xFFAB1CAE)),
@@ -90,10 +90,12 @@ class SearchString extends StatelessWidget {
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
               hintStyle: TextStyle(
-                color: Colors.white,
+                color: Color(0xFFFFFFFF),
                 fontSize: 12,
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 12,),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 12,
+              ),
               border: InputBorder.none,
             ),
           ),
@@ -127,7 +129,7 @@ class WidgetProduct extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color:Colors.white,
+          color: Colors.white,
           child: Image.asset(
             imageName,
             height: imageHeight,
