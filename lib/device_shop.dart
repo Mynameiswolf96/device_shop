@@ -19,30 +19,41 @@ class DeviceShop extends StatelessWidget {
             style: TextStyle(fontSize: 24, color: Colors.purple),
           ),
         ),
-        body: ListView(
-          children: const [
-            SizedBox(
+        body: Column(
+          children: [
+            const SizedBox(
               height: 30,
             ),
-            SearchString(),
-            SizedBox(
-              height: 170,
-              width: 150,
-              child: Expanded(child: CatalogOfProducts()),
+            const SearchString(),
+            Expanded(
+              child: ListView(
+                children: const [
+
+                  SizedBox(
+                    height: 170,
+                    width: 150,
+                    child: Row(
+                      children: [
+                        Expanded(child: CatalogOfProducts(),),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  CatalogRowWidget(
+                    icon: Icons.local_fire_department,
+                    catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
+                  ),
+                  OftenBuyCatalog(),
+                  CatalogRowWidget(
+                    icon: Icons.percent,
+                    catalogName: AppText.nameOfDiscountCatalog,
+                  ),
+                  DiscountCatalog(),
+                ],
+              ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            CatalogRowWidget(
-              icon: Icons.local_fire_department,
-              catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
-            ),
-            OftenBuyCatalog(),
-            CatalogRowWidget(
-              icon: Icons.percent,
-              catalogName: AppText.nameOfDiscountCatalog,
-            ),
-            DiscountCatalog(),
           ],
         ),
       ),
