@@ -8,54 +8,56 @@ class DeviceShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        drawer: const MainDrawer(),
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.white60,
-          title: const Text(
-            AppText.nameOfApp,
-            style: TextStyle(fontSize: 24, color: Colors.purple),
+    return Scaffold(
+      drawer: const MainDrawer(),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white60,
+        title: const Text(
+          AppText.nameOfApp,
+          style: TextStyle(fontSize: 24, color: Colors.purple),
+        ),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 30,
           ),
-        ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 30,
+          const SearchString(),
+          const SizedBox(
+            height: 30,
+          ),
+          Expanded(
+            child: ListView(
+              children: const [
+                SizedBox(
+                  height: 170,
+                  width: 150,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CatalogOfProducts(),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                CatalogRowWidget(
+                  icon: Icons.local_fire_department,
+                  catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
+                ),
+                OftenBuyCatalog(),
+                CatalogRowWidget(
+                  icon: Icons.percent,
+                  catalogName: AppText.nameOfDiscountCatalog,
+                ),
+                DiscountCatalog(),
+              ],
             ),
-            const SearchString(),
-            Expanded(
-              child: ListView(
-                children: const [
-
-                  SizedBox(
-                    height: 170,
-                    width: 150,
-                    child: Row(
-                      children: [
-                        Expanded(child: CatalogOfProducts(),),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  CatalogRowWidget(
-                    icon: Icons.local_fire_department,
-                    catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
-                  ),
-                  OftenBuyCatalog(),
-                  CatalogRowWidget(
-                    icon: Icons.percent,
-                    catalogName: AppText.nameOfDiscountCatalog,
-                  ),
-                  DiscountCatalog(),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -74,22 +76,23 @@ class SearchString extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(left: 10),
-          height: 30,
+          height: 24,
           color: Colors.grey,
           child: const Icon(Icons.search),
         ),
         Container(
           padding: const EdgeInsets.only(left: 20),
-          width: 350,
-          height: 30,
+          width: 331,
+          height: 24,
           color: Colors.grey,
           child: const TextField(
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
               hintStyle: TextStyle(
                 color: Colors.white,
+                fontSize: 12,
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 10),
+              contentPadding: EdgeInsets.symmetric(vertical: 12,),
               border: InputBorder.none,
             ),
           ),
@@ -147,7 +150,7 @@ class OftenBuyCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.23,right: 16.23,top:20),
+      padding: const EdgeInsets.only(left: 16.23, right: 16.23, top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: listOFWidgetProductOftenBuy,
@@ -162,7 +165,7 @@ class DiscountCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.23,right: 16.23,top: 20),
+      padding: const EdgeInsets.only(left: 16.23, right: 16.23, top: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: listOFWidgetOfDiscountProduct,
@@ -237,7 +240,7 @@ class CatalogRowWidget extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 5),
+          padding: const EdgeInsets.only(left: 15),
           child: Icon(icon),
         ),
         const SizedBox(

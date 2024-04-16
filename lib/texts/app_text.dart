@@ -1,5 +1,5 @@
 class AppText {
-  static const String nameOfApp = 'device shop';
+  static const String nameOfApp = 'Device shop';
 
   static const String searchInCatalog = 'Поиск в каталоге';
 
