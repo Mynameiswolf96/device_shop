@@ -25,6 +25,8 @@ class AppImages {
   static const String headphonesDiscountImages =
       'assets/imagesdiscounts/headphonesDiscounts.jpg';
 
+  static const String avatarImage='assets/avatar/avatar.jpg';
+
   static const List<String> listOfImagesNameMain = [
     lapTopMainImage,
     playstationMainImage,
@@ -33,18 +35,18 @@ class AppImages {
     tVMainImage,
     vacuumCleanerMainImage,
     videocardMainImage,
-    micMainImage
+    micMainImage,
   ];
 
   static const List<String> listOFImagesNameOften = [
     phoneOftenImages,
     microphoneOftenImages,
-    playstationOftenImages
+    playstationOftenImages,
   ];
 
   static const List<String> listOfImagesDiscountsMain = [
     vacuumCleanerDiscountImages,
     videoCardDiscountImages,
-    headphonesDiscountImages
+    headphonesDiscountImages,
   ];
 }

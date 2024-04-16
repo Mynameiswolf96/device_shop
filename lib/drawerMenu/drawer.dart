@@ -1,3 +1,4 @@
+import 'package:device_shop/texts/app_images.dart';
 import 'package:device_shop/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -12,31 +13,40 @@ class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: ListView(
-      children: const [
-        UserAccountsDrawerHeader(
-          accountName: Text(AppText.accountName),
-          accountEmail: Text(AppText.accountEmail),
-          currentAccountPicture: CircleAvatar(
-            backgroundImage: AssetImage('assets/avatar/avatar.jpg'),
+      child: ListView(
+        children: [
+          const UserAccountsDrawerHeader(
+            accountName: Text(AppText.accountName),
+            accountEmail: Text(AppText.accountEmail),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage(AppImages.avatarImage),
+            ),
           ),
-        ),
-        ListTile(
-          title: Text(AppText.firstItemInDrawer),
-        ),
-        Divider(),
-        ListTile(
-          title: Text(AppText.secondItemInDrawer),
-        ),
-        Divider(),
-        ListTile(
-          title: Text(AppText.thirstItemInDrawer),
-        ),
-        Divider(),
-        ListTile(
-          title: Text(AppText.fourItemInDrawer),
-        ),
-      ],
-    ));
+          ...listOfItemsDrawer,
+        ],
+      ),
+    );
   }
 }
+
+class ItemInDrawer extends StatelessWidget {
+  const ItemInDrawer({
+    required this.nameItemDrawer,
+    super.key,
+  });
+
+  final String nameItemDrawer;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(nameItemDrawer),
+    );
+  }
+}
+
+List<Widget> listOfItemsDrawer = List.generate(
+  AppText.listOfNameOfDrawerItem.length,
+  (index) =>
+      ItemInDrawer(nameItemDrawer: AppText.listOfNameOfDrawerItem[index]),
+);

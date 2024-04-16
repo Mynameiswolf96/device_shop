@@ -56,4 +56,10 @@ class AppText {
     videoCardNameOnDiscount,
     headphonesNameOnDiscount,
   ];
+  static const List<String> listOfNameOfDrawerItem = [
+    firstItemInDrawer,
+    secondItemInDrawer,
+    thirstItemInDrawer,
+    fourItemInDrawer,
+  ];
 }

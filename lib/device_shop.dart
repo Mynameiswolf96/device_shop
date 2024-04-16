@@ -4,7 +4,7 @@ import 'package:device_shop/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
 class DeviceShop extends StatelessWidget {
-  const DeviceShop({Key? key}) : super(key: key);
+  const DeviceShop({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,32 +20,32 @@ class DeviceShop extends StatelessWidget {
           ),
         ),
         body: ListView(
-          children: [
-            const SizedBox(
+          children: const [
+            SizedBox(
               height: 30,
             ),
-            const searchString(),
-            const SizedBox(
-              height: 48,
-            ),
-            Container(
-              height: 200,
+            SearchString(),
+            SizedBox(
+              height: 170,
               width: 150,
-              child: const Expanded(child: CatalogOfProducts()),
+              child: Expanded(child: CatalogOfProducts()),
             ),
-            const SizedBox(
+            SizedBox(
               height: 67,
             ),
-            const OftenBuyRowWidget(),
-            const SizedBox(
+            CatalogRowWidget(
+              icon: Icons.local_fire_department,
+              catalogName: 'Часто покупают',
+            ),
+            OftenBuyCatalog(),
+            CatalogRowWidget(
+              icon: Icons.percent,
+              catalogName: 'Товар на скидках',
+            ),
+            SizedBox(
               height: 20,
             ),
-            const OftenBuyCatalog(),
-            const DiscountRowWidget(),
-            const SizedBox(
-              height: 20,
-            ),
-            const DiscountCatalog(),
+            DiscountCatalog(),
           ],
         ),
       ),
@@ -53,21 +53,9 @@ class DeviceShop extends StatelessWidget {
   }
 }
 
-class IconList extends StatelessWidget {
-  const IconList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(top: 3),
-      child: const Icon(Icons.list),
-    );
-  }
-}
-
 class OftenBuyRowWidget extends StatelessWidget {
   const OftenBuyRowWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -77,12 +65,10 @@ class OftenBuyRowWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 5),
           child: const Icon(Icons.local_fire_department),
         ),
-        Container(
-          padding: const EdgeInsets.only(
-            left: 15,
-          ),
-          child: const Text(AppText.nameOfFrequentlyPurchasedCatalog),
+        const SizedBox(
+          width: 15,
         ),
+        const Text(AppText.nameOfFrequentlyPurchasedCatalog),
       ],
     );
   }
@@ -100,31 +86,32 @@ class DiscountRowWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 5),
           child: const Icon(Icons.percent),
         ),
-        Container(
-          padding: const EdgeInsets.only(
-            left: 15,
-          ),
-          child: const Text(AppText.nameOfDiscountCatalog),
+        const SizedBox(
+          width: 15,
         ),
+        const Text(AppText.nameOfDiscountCatalog),
       ],
     );
   }
 }
 
-class searchString extends StatelessWidget {
-  const searchString({super.key});
+class SearchString extends StatelessWidget {
+  const SearchString({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
+        const SizedBox(
+          height: 48,
+        ),
         Container(
           height: 30,
           color: Colors.grey,
           child: const Icon(Icons.search),
         ),
         Container(
-          padding: const EdgeInsets.only(left: 20.0),
+          padding: const EdgeInsets.only(left: 20),
           alignment: Alignment.topCenter,
           width: 365,
           height: 30,
@@ -141,17 +128,22 @@ class searchString extends StatelessWidget {
 }
 
 class WidgetProduct extends StatelessWidget {
-  final String nameOfProduct;
-  final String nameOfImage;
-  final double widthOfContainerText;
-  final double heightOfContainerText;
+  final String productName;
+  final String imageName;
+  final double imageHeight;
+  final double imageWidth;
 
-  WidgetProduct({
+  final double containerTextWidth;
+  final double containerTextHeight;
+
+  const WidgetProduct({
+    required this.productName,
+    required this.imageName,
+    required this.imageHeight,
+    required this.imageWidth,
+    required this.containerTextHeight,
+    required this.containerTextWidth,
     super.key,
-    required this.nameOfProduct,
-    required this.nameOfImage,
-    required this.heightOfContainerText,
-    required this.widthOfContainerText,
   });
 
   @override
@@ -159,18 +151,17 @@ class WidgetProduct extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
-            nameOfImage,
-            height: 50.89,
-            width: 50,
+            imageName,
+            height: imageHeight,
+            width: imageWidth,
           ),
-          Container(
-            height: heightOfContainerText,
-            width: widthOfContainerText,
+          SizedBox(
+            height: containerTextHeight,
+            width: containerTextWidth,
             child: Text(
-              nameOfProduct,
+              productName,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12),
             ),
@@ -216,13 +207,15 @@ class CatalogOfProducts extends StatelessWidget {
         mainAxisSpacing: 2, // Отступы по оси X
         crossAxisSpacing: 3, // Отступы по оси Y
       ),
-      itemCount: 8,
+      itemCount: AppText.listOfNameProductChapter.length,
       itemBuilder: (BuildContext context, int index) {
         return WidgetProduct(
-          nameOfProduct: AppText.listOfNameProductChapter[index],
-          nameOfImage: AppImages.listOfImagesNameMain[index],
-          heightOfContainerText: 28,
-          widthOfContainerText: 90,
+          imageHeight: 50,
+          imageWidth: 50.98,
+          productName: AppText.listOfNameProductChapter[index],
+          imageName: AppImages.listOfImagesNameMain[index],
+          containerTextHeight: 28,
+          containerTextWidth: 90,
         );
       },
     );
@@ -230,18 +223,52 @@ class CatalogOfProducts extends StatelessWidget {
 }
 
 List<Widget> listOFWidgetProductOftenBuy = List.generate(
-  3,
+  AppText.listOfNameFrequentlyPurchased.length,
   (index) => WidgetProduct(
-      nameOfProduct: AppText.listOfNameFrequentlyPurchased[index],
-      nameOfImage: AppImages.listOFImagesNameOften[index],
-      heightOfContainerText: 130,
-      widthOfContainerText: 65),
+    imageHeight: 100,
+    imageWidth: 77.66,
+    productName: AppText.listOfNameFrequentlyPurchased[index],
+    imageName: AppImages.listOFImagesNameOften[index],
+    containerTextHeight: 120,
+    containerTextWidth: 65,
+  ),
 );
 List<Widget> listOFWidgetOfDiscountProduct = List.generate(
-  3,
+  AppText.listOfNameOfDiscount.length,
   (index) => WidgetProduct(
-      nameOfProduct: AppText.listOfNameOfDiscount[index],
-      nameOfImage: AppImages.listOfImagesDiscountsMain[index],
-      heightOfContainerText: 130,
-      widthOfContainerText: 65),
+    imageHeight: 100,
+    imageWidth: 77.66,
+    productName: AppText.listOfNameOfDiscount[index],
+    imageName: AppImages.listOfImagesDiscountsMain[index],
+    containerTextHeight: 120,
+    containerTextWidth: 65,
+  ),
 );
+
+class CatalogRowWidget extends StatelessWidget {
+  const CatalogRowWidget({
+    required this.icon,
+    required this.catalogName,
+    super.key,
+  });
+
+  final IconData icon;
+  final String catalogName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 5),
+          child: Icon(icon),
+        ),
+        const SizedBox(
+          width: 15,
+        ),
+        Text(catalogName),
+      ],
+    );
+  }
+}
