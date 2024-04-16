@@ -35,12 +35,12 @@ class DeviceShop extends StatelessWidget {
             ),
             CatalogRowWidget(
               icon: Icons.local_fire_department,
-              catalogName: 'Часто покупают',
+              catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
             ),
             OftenBuyCatalog(),
             CatalogRowWidget(
               icon: Icons.percent,
-              catalogName: 'Товар на скидках',
+              catalogName: AppText.nameOfDiscountCatalog,
             ),
             SizedBox(
               height: 20,
@@ -53,72 +53,36 @@ class DeviceShop extends StatelessWidget {
   }
 }
 
-class OftenBuyRowWidget extends StatelessWidget {
-  const OftenBuyRowWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 5),
-          child: const Icon(Icons.local_fire_department),
-        ),
-        const SizedBox(
-          width: 15,
-        ),
-        const Text(AppText.nameOfFrequentlyPurchasedCatalog),
-      ],
-    );
-  }
-}
-
-class DiscountRowWidget extends StatelessWidget {
-  const DiscountRowWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 5),
-          child: const Icon(Icons.percent),
-        ),
-        const SizedBox(
-          width: 15,
-        ),
-        const Text(AppText.nameOfDiscountCatalog),
-      ],
-    );
-  }
-}
-
 class SearchString extends StatelessWidget {
   const SearchString({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(
           height: 48,
         ),
         Container(
+          padding: const EdgeInsets.only(left: 10),
           height: 30,
           color: Colors.grey,
           child: const Icon(Icons.search),
         ),
         Container(
           padding: const EdgeInsets.only(left: 20),
-          alignment: Alignment.topCenter,
-          width: 365,
+          width: 350,
           height: 30,
           color: Colors.grey,
           child: const TextField(
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
+              hintStyle: TextStyle(
+                color: Colors.white,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 10),
+              border: InputBorder.none,
             ),
           ),
         ),
@@ -148,26 +112,23 @@ class WidgetProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10),
-      child: Column(
-        children: [
-          Image.asset(
-            imageName,
-            height: imageHeight,
-            width: imageWidth,
+    return Column(
+      children: [
+        Image.asset(
+          imageName,
+          height: imageHeight,
+          width: imageWidth,
+        ),
+        SizedBox(
+          height: containerTextHeight,
+          width: containerTextWidth,
+          child: Text(
+            productName,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 12),
           ),
-          SizedBox(
-            height: containerTextHeight,
-            width: containerTextWidth,
-            child: Text(
-              productName,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -202,6 +163,7 @@ class CatalogOfProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         mainAxisSpacing: 2, // Отступы по оси X

@@ -25,7 +25,7 @@ class AppImages {
   static const String headphonesDiscountImages =
       'assets/imagesdiscounts/headphonesDiscounts.jpg';
 
-  static const String avatarImage='assets/avatar/avatar.jpg';
+  static const String avatarImage = 'assets/avatar/avatar.jpg';
 
   static const List<String> listOfImagesNameMain = [
     lapTopMainImage,
