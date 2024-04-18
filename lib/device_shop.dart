@@ -1,3 +1,4 @@
+import 'package:device_shop/colors/app_colors.dart';
 import 'package:device_shop/drawerMenu/drawer.dart';
 import 'package:device_shop/texts/app_images.dart';
 import 'package:device_shop/texts/app_text.dart';
@@ -9,28 +10,28 @@ class DeviceShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColor.white,
       drawer: const MainDrawer(),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColor.white,
         title: const Text(
           AppText.nameOfApp,
-          style: TextStyle(fontSize: 24, color: Color(0xFFAB1CAE)),
+          style: TextStyle(
+            fontSize: 24,
+            color: AppColor.purple,
+          ),
         ),
       ),
       body: Column(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
           const SearchString(),
-          const SizedBox(
-            height: 30,
-          ),
           Expanded(
             child: ListView(
               children: const [
+                SizedBox(
+                  height: 30,
+                ),
                 SizedBox(
                   height: 170,
                   width: 150,
@@ -78,19 +79,19 @@ class SearchString extends StatelessWidget {
         Container(
           padding: const EdgeInsets.only(left: 10),
           height: 24,
-          color: const Color(0xFFD9D9D9),
+          color: AppColor.grey,
           child: const Icon(Icons.search),
         ),
         Container(
           padding: const EdgeInsets.only(left: 20),
           width: 331,
           height: 24,
-          color: const Color(0xFFD9D9D9),
+          color: AppColor.grey,
           child: const TextField(
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
               hintStyle: TextStyle(
-                color: Color(0xFFFFFFFF),
+                color: AppColor.white,
                 fontSize: 12,
               ),
               contentPadding: EdgeInsets.symmetric(
@@ -129,7 +130,7 @@ class WidgetProduct extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: Colors.white,
+          color: AppColor.white,
           child: Image.asset(
             imageName,
             height: imageHeight,
