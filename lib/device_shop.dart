@@ -22,6 +22,7 @@ class DeviceShop extends StatelessWidget {
             color: AppColor.purple,
           ),
         ),
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -78,25 +79,26 @@ class SearchString extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.only(left: 10),
-          height: 24,
+          height: 35,
           color: AppColor.grey,
           child: const Icon(Icons.search),
         ),
         Container(
-          padding: const EdgeInsets.only(left: 20),
+          padding: const EdgeInsets.only(
+            left: 20,
+          ),
           width: 331,
-          height: 24,
+          height: 35,
           color: AppColor.grey,
           child: const TextField(
+            cursorHeight: 30,
             decoration: InputDecoration(
               hintText: AppText.searchInCatalog,
               hintStyle: TextStyle(
                 color: AppColor.white,
-                fontSize: 12,
+                fontSize: 13,
               ),
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 12,
-              ),
+              contentPadding: EdgeInsets.only(bottom: 18),
               border: InputBorder.none,
             ),
           ),
@@ -129,7 +131,7 @@ class WidgetProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        ColoredBox(
           color: AppColor.white,
           child: Image.asset(
             imageName,
@@ -200,7 +202,7 @@ class CatalogOfProducts extends StatelessWidget {
           imageWidth: 50.98,
           productName: AppText.listOfNameProductChapter[index],
           imageName: AppImages.listOfImagesNameMain[index],
-          containerTextHeight: 28,
+          containerTextHeight: 32,
           containerTextWidth: 90,
         );
       },
