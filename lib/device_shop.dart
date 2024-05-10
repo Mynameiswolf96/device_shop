@@ -22,7 +22,7 @@ class DeviceShop extends StatelessWidget {
             color: AppColor.purple,
           ),
         ),
-        elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: Column(
         children: [
@@ -52,6 +52,9 @@ class DeviceShop extends StatelessWidget {
                   catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
                 ),
                 OftenBuyCatalog(),
+                SizedBox(
+                  height: 30,
+                ),
                 CatalogRowWidget(
                   icon: Icons.percent,
                   catalogName: AppText.nameOfDiscountCatalog,
@@ -71,39 +74,40 @@ class SearchString extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 48,
-        ),
-        Container(
-          padding: const EdgeInsets.only(left: 10),
-          height: 35,
-          color: AppColor.grey,
-          child: const Icon(Icons.search),
-        ),
-        Container(
-          padding: const EdgeInsets.only(
-            left: 20,
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: Row(
+        children: [
+          const SizedBox(
+            height: 48,
           ),
-          width: 331,
-          height: 35,
-          color: AppColor.grey,
-          child: const TextField(
-            cursorHeight: 30,
-            decoration: InputDecoration(
-              hintText: AppText.searchInCatalog,
-              hintStyle: TextStyle(
-                color: AppColor.white,
-                fontSize: 13,
+          Container(
+            height: 35,
+            color: AppColor.grey,
+            child: const Icon(Icons.search),
+          ),
+          Container(
+            padding: const EdgeInsets.only(
+              left: 20,
+            ),
+            width: 344,
+            height: 35,
+            color: AppColor.grey,
+            child: const TextField(
+              cursorHeight: 30,
+              decoration: InputDecoration(
+                hintText: AppText.searchInCatalog,
+                hintStyle: TextStyle(
+                  color: AppColor.white,
+                  fontSize: 13,
+                ),
+                contentPadding: EdgeInsets.only(bottom: 18),
+                border: InputBorder.none,
               ),
-              contentPadding: EdgeInsets.only(bottom: 18),
-              border: InputBorder.none,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
