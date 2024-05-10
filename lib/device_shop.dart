@@ -22,7 +22,7 @@ class DeviceShop extends StatelessWidget {
             color: AppColor.purple,
           ),
         ),
-        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
       ),
       body: Column(
         children: [
@@ -74,39 +74,39 @@ class SearchString extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8),
+    return  Padding(
+      padding: const EdgeInsets.only(left:15),
       child: Row(
-        children: [
-          const SizedBox(
-            height: 48,
-          ),
-          Container(
-            height: 35,
-            color: AppColor.grey,
-            child: const Icon(Icons.search),
-          ),
-          Container(
-            padding: const EdgeInsets.only(
-              left: 20,
+          children: [
+            const SizedBox(
+              height: 48,
             ),
-            width: 344,
-            height: 35,
-            color: AppColor.grey,
-            child: const TextField(
-              cursorHeight: 30,
-              decoration: InputDecoration(
-                hintText: AppText.searchInCatalog,
-                hintStyle: TextStyle(
-                  color: AppColor.white,
-                  fontSize: 13,
+            Container(
+              height: 35,
+              color: AppColor.grey,
+              child: const Icon(Icons.search),
+            ),
+            Container(
+              padding: const EdgeInsets.only(
+                left: 20,
+              ),
+              width: 344,
+              height: 35,
+              color: AppColor.grey,
+              child: const TextField(
+                cursorHeight: 30,
+                decoration: InputDecoration(
+                  hintText: AppText.searchInCatalog,
+                  hintStyle: TextStyle(
+                    color: AppColor.white,
+                    fontSize: 13,
+                  ),
+                  contentPadding: EdgeInsets.only(bottom: 18),
+                  border: InputBorder.none,
                 ),
-                contentPadding: EdgeInsets.only(bottom: 18),
-                border: InputBorder.none,
               ),
             ),
-          ),
-        ],
+          ],
       ),
     );
   }
