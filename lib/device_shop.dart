@@ -1,7 +1,7 @@
-import 'package:device_shop/colors/app_colors.dart';
 import 'package:device_shop/drawerMenu/drawer.dart';
-import 'package:device_shop/texts/app_images.dart';
-import 'package:device_shop/texts/app_text.dart';
+import 'package:device_shop/utils/colors/app_colors.dart';
+import 'package:device_shop/utils/texts/app_images.dart';
+import 'package:device_shop/utils/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
 class DeviceShop extends StatelessWidget {
@@ -29,37 +29,30 @@ class DeviceShop extends StatelessWidget {
           const SearchString(),
           Expanded(
             child: ListView(
-              children: const [
-                SizedBox(
+              children: [
+                const SizedBox(
                   height: 30,
                 ),
-                SizedBox(
-                  height: 170,
-                  width: 150,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CatalogOfProducts(),
-                      ),
-                    ],
-                  ),
+                const SizedBox(
+                  height: 200,
+                  child: CatalogOfProducts(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 CatalogRowWidget(
                   icon: Icons.local_fire_department,
-                  catalogName: AppText.nameOfFrequentlyPurchasedCatalog,
+                  titleName: AppText.nameOfFrequentlyPurchasedCatalog,
+                  listOFWidgetProduct: listOFWidgetProductOftenBuy,
                 ),
-                OftenBuyCatalog(),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 CatalogRowWidget(
                   icon: Icons.percent,
-                  catalogName: AppText.nameOfDiscountCatalog,
+                  titleName: AppText.nameOfDiscountCatalog,
+                  listOFWidgetProduct: listOFWidgetOfDiscountProduct,
                 ),
-                DiscountCatalog(),
               ],
             ),
           ),
@@ -74,115 +67,77 @@ class SearchString extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.only(left:15),
+    final screenSize = MediaQuery.of(context).size;
+    return Container(
+      margin: const EdgeInsets.only(left: 15),
+      width: screenSize.width,
+      height: 35,
+      color: AppColor.grey,
+      padding: const EdgeInsets.only(left: 15),
       child: Row(
-          children: [
-            const SizedBox(
-              height: 48,
-            ),
-            Container(
-              height: 35,
-              color: AppColor.grey,
-              child: const Icon(Icons.search),
-            ),
-            Container(
-              padding: const EdgeInsets.only(
-                left: 20,
-              ),
-              width: 344,
-              height: 35,
-              color: AppColor.grey,
-              child: const TextField(
-                cursorHeight: 30,
-                decoration: InputDecoration(
-                  hintText: AppText.searchInCatalog,
-                  hintStyle: TextStyle(
-                    color: AppColor.white,
-                    fontSize: 13,
-                  ),
-                  contentPadding: EdgeInsets.only(bottom: 18),
-                  border: InputBorder.none,
+        children: [
+          Container(
+            height: 35,
+            color: AppColor.grey,
+            child: const Icon(Icons.search),
+          ),
+          const Expanded(
+            child: TextField(
+              cursorHeight: 30,
+              decoration: InputDecoration(
+                hintText: AppText.searchInCatalog,
+                hintStyle: TextStyle(
+                  color: AppColor.white,
+                  fontSize: 13,
                 ),
+                contentPadding: EdgeInsets.only(bottom: 18),
+                border: InputBorder.none,
               ),
             ),
-          ],
+          ),
+        ],
       ),
     );
   }
 }
 
+enum ProductImageSize { small, big }
+
 class WidgetProduct extends StatelessWidget {
   final String productName;
   final String imageName;
-  final double imageHeight;
-  final double imageWidth;
-
-  final double containerTextWidth;
-  final double containerTextHeight;
+  final ProductImageSize imageSize;
 
   const WidgetProduct({
     required this.productName,
     required this.imageName,
-    required this.imageHeight,
-    required this.imageWidth,
-    required this.containerTextHeight,
-    required this.containerTextWidth,
+    this.imageSize = ProductImageSize.small,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return Column(
       children: [
-        ColoredBox(
-          color: AppColor.white,
-          child: Image.asset(
-            imageName,
-            height: imageHeight,
-            width: imageWidth,
-          ),
+        Image.asset(
+          imageName,
+          fit: BoxFit.contain,
+          height: screenSize.width *
+              (imageSize.index == ProductImageSize.small.index ? 0.15 : 0.25),
         ),
-        SizedBox(
-          height: containerTextHeight,
-          width: containerTextWidth,
-          child: Text(
-            productName,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12),
+        Text(
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          productName,
+          textAlign: TextAlign.center,
+          // overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 12,
           ),
         ),
       ],
-    );
-  }
-}
-
-class OftenBuyCatalog extends StatelessWidget {
-  const OftenBuyCatalog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.23, right: 16.23, top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: listOFWidgetProductOftenBuy,
-      ),
-    );
-  }
-}
-
-class DiscountCatalog extends StatelessWidget {
-  const DiscountCatalog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16.23, right: 16.23, top: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: listOFWidgetOfDiscountProduct,
-      ),
     );
   }
 }
@@ -202,12 +157,8 @@ class CatalogOfProducts extends StatelessWidget {
       itemCount: AppText.listOfNameProductChapter.length,
       itemBuilder: (BuildContext context, int index) {
         return WidgetProduct(
-          imageHeight: 50,
-          imageWidth: 50.98,
           productName: AppText.listOfNameProductChapter[index],
           imageName: AppImages.listOfImagesNameMain[index],
-          containerTextHeight: 32,
-          containerTextWidth: 90,
         );
       },
     );
@@ -216,50 +167,64 @@ class CatalogOfProducts extends StatelessWidget {
 
 List<Widget> listOFWidgetProductOftenBuy = List.generate(
   AppText.listOfNameFrequentlyPurchased.length,
-  (index) => WidgetProduct(
-    imageHeight: 100,
-    imageWidth: 77.66,
+      (index) => WidgetProduct(
     productName: AppText.listOfNameFrequentlyPurchased[index],
     imageName: AppImages.listOFImagesNameOften[index],
-    containerTextHeight: 120,
-    containerTextWidth: 65,
+    imageSize: ProductImageSize.big,
   ),
 );
 List<Widget> listOFWidgetOfDiscountProduct = List.generate(
   AppText.listOfNameOfDiscount.length,
-  (index) => WidgetProduct(
-    imageHeight: 100,
-    imageWidth: 77.66,
+      (index) => WidgetProduct(
     productName: AppText.listOfNameOfDiscount[index],
     imageName: AppImages.listOfImagesDiscountsMain[index],
-    containerTextHeight: 120,
-    containerTextWidth: 65,
+    imageSize: ProductImageSize.big,
   ),
 );
 
 class CatalogRowWidget extends StatelessWidget {
   const CatalogRowWidget({
     required this.icon,
-    required this.catalogName,
+    required this.titleName,
+    required this.listOFWidgetProduct,
     super.key,
   });
 
   final IconData icon;
-  final String catalogName;
+  final String titleName;
+  final List<Widget> listOFWidgetProduct;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 15),
-          child: Icon(icon),
+        Row(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(left: 15),
+              child: Icon(icon),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            Text(titleName),
+          ],
         ),
-        const SizedBox(
-          width: 15,
+        Padding(
+          padding: const EdgeInsets.only(left: 16.23, right: 16.23, top: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: listOFWidgetProduct.map(
+                  (e) {
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width * .3,
+                  child: e,
+                );
+              },
+            ).toList(),
+          ),
         ),
-        Text(catalogName),
       ],
     );
   }

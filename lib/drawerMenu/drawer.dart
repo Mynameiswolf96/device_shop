@@ -1,15 +1,10 @@
-import 'package:device_shop/texts/app_images.dart';
-import 'package:device_shop/texts/app_text.dart';
+import 'package:device_shop/utils/texts/app_images.dart';
+import 'package:device_shop/utils/texts/app_text.dart';
 import 'package:flutter/material.dart';
 
-class MainDrawer extends StatefulWidget {
+class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
-  @override
-  State<MainDrawer> createState() => _MainDrawerState();
-}
-
-class _MainDrawerState extends State<MainDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -29,11 +24,8 @@ class _MainDrawerState extends State<MainDrawer> {
   }
 }
 
-class ItemInDrawer extends StatelessWidget {
-  const ItemInDrawer({
-    required this.nameItemDrawer,
-    super.key,
-  });
+class DrawerItem extends StatelessWidget {
+  const DrawerItem({required this.nameItemDrawer, super.key});
 
   final String nameItemDrawer;
 
@@ -47,6 +39,5 @@ class ItemInDrawer extends StatelessWidget {
 
 List<Widget> listOfItemsDrawer = List.generate(
   AppText.listOfNameOfDrawerItem.length,
-  (index) =>
-      ItemInDrawer(nameItemDrawer: AppText.listOfNameOfDrawerItem[index]),
+  (index) => DrawerItem(nameItemDrawer: AppText.listOfNameOfDrawerItem[index]),
 );
