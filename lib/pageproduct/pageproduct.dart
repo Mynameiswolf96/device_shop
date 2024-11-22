@@ -77,7 +77,7 @@ class PageProduct extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    context.go('/main');
+                    context.pop();
                   },
                   child: const Align(
                     alignment: Alignment.bottomCenter,

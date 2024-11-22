@@ -166,7 +166,7 @@ class CatalogProducts extends StatelessWidget {
           productName: AppText.listOfNameProductChapter[index],
           imageName: AppImages.listOfImagesNameMain[index],
           onTap: () {
-            context.go(
+            context.push(
               '/page_product',
               extra: {
                 'name': AppText.listOfNameProductChapter[index],
@@ -187,7 +187,7 @@ List<Widget> listOFWidgetProductOftenBuy = List.generate(
     imageName: AppImages.listOFImagesNameOften[index],
     imageSize: ProductImageSize.big,
     onTap: () {
-      App.ctx?.go(
+      App.ctx?.push(
         '/page_product',
         extra: {
           'name': AppText.listFrequentlyPurchased[index],
@@ -205,7 +205,7 @@ List<Widget> listOFDiscountProduct = List.generate(
     imageName: AppImages.listOfImagesDiscountsMain[index],
     imageSize: ProductImageSize.big,
     onTap: () {
-      App.ctx?.go(
+      App.ctx?.push(
         '/page_product',
         extra: {
           'name': AppText.listOfDiscount[index],
