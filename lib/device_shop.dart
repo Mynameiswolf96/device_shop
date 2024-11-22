@@ -169,9 +169,8 @@ class CatalogProducts extends StatelessWidget {
             context.go(
               '/page_product',
               extra: {
-                '0': AppText.listOfNameProductChapter[index],
-                '1': AppImages.listOfImagesNameMain[index],
-
+                'name': AppText.listOfNameProductChapter[index],
+                'image': AppImages.listOfImagesNameMain[index],
               },
             );
           },
@@ -191,9 +190,9 @@ List<Widget> listOFWidgetProductOftenBuy = List.generate(
       App.ctx?.go(
         '/page_product',
         extra: {
-          '0': AppText.listFrequentlyPurchased[index],
-          '1': AppImages.listOFImagesNameOften[index],
-          '2': AppDescription.listOfDescriptionOften[index],
+          'name': AppText.listFrequentlyPurchased[index],
+          'image': AppImages.listOFImagesNameOften[index],
+          'description': AppDescription.listOfDescriptionOften[index],
         },
       );
     },
@@ -209,9 +208,9 @@ List<Widget> listOFDiscountProduct = List.generate(
       App.ctx?.go(
         '/page_product',
         extra: {
-          '0': AppText.listOfDiscount[index],
-          '1': AppImages.listOfImagesDiscountsMain[index],
-          '2': AppDescription.listOfDescriptionSale[index],
+          'name': AppText.listOfDiscount[index],
+          'image': AppImages.listOfImagesDiscountsMain[index],
+          'description': AppDescription.listOfDescriptionSale[index],
         },
       );
     },

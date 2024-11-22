@@ -31,10 +31,13 @@ class App extends StatelessWidget {
         builder: (context, state) {
           final extra = state.extra as Map?;
           return PageProduct(
-            productName: extra != null ? extra['0'] : AppText.listOfNameProduct,
+            productName:
+                extra != null && extra['name'] != null ? extra['name'] : '',
             imageName:
-                extra != null ? extra['1'] : AppImages.listOfImagesNameMain,
-            description: extra != null ? extra['2'] : {},
+                extra != null && extra['image'] != null ? extra['image'] : '',
+            description: extra != null && extra['description'] != null
+                ? extra['description']
+                : {},
           );
         },
       ),

@@ -16,7 +16,8 @@ class PageRegistration extends StatelessWidget {
         ),
         authenticationName: 'Email',
         icon: Icons.email,
-        suffixIcon: null, obscureText: false,
+        suffixIcon: null,
+        obscureText: false,
       ),
       textFieldsPassword: TextFields(
         textEditingController: TextEditingController.fromValue(
@@ -24,7 +25,8 @@ class PageRegistration extends StatelessWidget {
         ),
         authenticationName: 'Password',
         icon: Icons.password,
-        suffixIcon: Icons.remove_red_eye, obscureText: true,
+        suffixIcon: Icons.remove_red_eye,
+        obscureText: true,
       ),
       bottomTextButton: 'Зарегистрироваться',
       questionText: 'Есть аккаунт? Войдите',

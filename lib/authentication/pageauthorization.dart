@@ -16,7 +16,8 @@ class PageAuthorization extends StatelessWidget {
         suffixIcon: null,
         textEditingController: TextEditingController.fromValue(
           const TextEditingValue(text: 'user'),
-        ), obscureText: false,
+        ),
+        obscureText: false,
       ),
       textFieldsPassword: TextFields(
         textEditingController: TextEditingController.fromValue(
@@ -24,7 +25,8 @@ class PageAuthorization extends StatelessWidget {
         ),
         authenticationName: 'Password',
         icon: Icons.password,
-        suffixIcon: Icons.remove_red_eye, obscureText: true,
+        suffixIcon: Icons.remove_red_eye,
+        obscureText: true,
       ),
       bottomTextButton: 'Войти',
       questionText: 'Нет аккаунта? Зарегистрируйтесь',
