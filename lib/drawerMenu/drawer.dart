@@ -1,6 +1,8 @@
+import 'package:device_shop/app.dart';
 import 'package:device_shop/utils/texts/app_images.dart';
 import 'package:device_shop/utils/texts/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -33,11 +35,16 @@ class DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(nameItemDrawer),
+      onTap: () {
+        if (nameItemDrawer == 'Выйти') {
+          GoRouter.of(context).go('/');
+        }
+      },
     );
   }
 }
 
 List<Widget> listOfItemsDrawer = List.generate(
-  AppText.listOfNameOfDrawerItem.length,
-  (index) => DrawerItem(nameItemDrawer: AppText.listOfNameOfDrawerItem[index]),
+  AppText.listOfDrawerItem.length,
+  (index) => DrawerItem(nameItemDrawer: AppText.listOfDrawerItem[index]),
 );

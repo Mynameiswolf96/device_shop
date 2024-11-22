@@ -3,16 +3,16 @@ class AppText {
 
   static const String searchInCatalog = 'Поиск в каталоге';
 
-  static const String nameOfLaptopChapter = 'Ноутбуки';
-  static const String nameOfPlaystationChapter = 'Игровые приставки';
-  static const String nameOfSmartphoneChapter = 'Смартфоны';
-  static const String nameOfHeadphoneChapter = 'Наушники';
-  static const String nameOfTVChapter = 'Телевизоры';
-  static const String nameOfVacuumCleanerChapter = 'Пылесосы';
-  static const String nameOfVideoCardChapter = 'Видеокарты';
-  static const String nameOfMicrophoneChapter = 'Микрофоны';
-
-  static const String nameOfFrequentlyPurchasedCatalog = 'Часто покупают';
+  static const String laptopChapter = 'Ноутбуки';
+  static const String playstationChapter = 'Игровые приставки';
+  static const String smartphoneChapter = 'Смартфоны';
+  static const String headphoneChapter = 'Наушники';
+  static const String tVChapter = 'Телевизоры';
+  static const String vacuumCleanerChapter = 'Пылесосы';
+  static const String videoCardChapter = 'Видеокарты';
+  static const String microphoneChapter = 'Микрофоны';
+  static const String color = 'Микрофоны';
+  static const String frequentlyPurchasedCatalog = 'Часто покупают';
   static const String frequentlyPurchasedPhoneName =
       'Смартфон Samsung Galaxy S23 Ultra SM-S918B/DS 12GB/512GB';
   static const String frequentlyPurchasedHeadPhoneName =
@@ -20,12 +20,10 @@ class AppText {
   static const String frequentlyPurchasePlaystationName =
       'Игровая приставка Game Box G11 Pro';
 
-  static const String nameOfDiscountCatalog = 'Товар на скидках';
-  static const String vacuumCleanerNameOnDiscount =
-      'Пылесос бытовой NORMANN AVC-516';
-  static const String videoCardNameOnDiscount =
-      'NVIDIA GM107-400-A2 GTX750TI RB';
-  static const String headphonesNameOnDiscount =
+  static const String discountCatalog = 'Товар на скидках';
+  static const String vacuumCleanerDiscount = 'Пылесос бытовой NORMANN AVC-516';
+  static const String videoCardDiscount = 'NVIDIA GM107-400-A2 GTX750TI RB';
+  static const String headphonesDiscount =
       'Беспроводные наушники Awe T29, черные';
 
   static const String accountName = 'Valera';
@@ -34,32 +32,38 @@ class AppText {
   static const String secondItemInDrawer = 'Настройки';
   static const String thirstItemInDrawer = 'Описание приложения';
   static const String fourItemInDrawer = 'Выйти';
+
   static const List<String> listOfNameProductChapter = [
-    nameOfLaptopChapter,
-    nameOfPlaystationChapter,
-    nameOfSmartphoneChapter,
-    nameOfHeadphoneChapter,
-    nameOfTVChapter,
-    nameOfVacuumCleanerChapter,
-    nameOfVideoCardChapter,
-    nameOfMicrophoneChapter,
+    laptopChapter,
+    playstationChapter,
+    smartphoneChapter,
+    headphoneChapter,
+    tVChapter,
+    vacuumCleanerChapter,
+    videoCardChapter,
+    microphoneChapter,
   ];
 
-  static const List<String> listOfNameFrequentlyPurchased = [
+  static const List<String> listFrequentlyPurchased = [
     frequentlyPurchasedPhoneName,
     frequentlyPurchasedHeadPhoneName,
     frequentlyPurchasePlaystationName,
   ];
 
-  static const List<String> listOfNameOfDiscount = [
-    vacuumCleanerNameOnDiscount,
-    videoCardNameOnDiscount,
-    headphonesNameOnDiscount,
+  static const List<String> listOfDiscount = [
+    vacuumCleanerDiscount,
+    videoCardDiscount,
+    headphonesDiscount,
   ];
-  static const List<String> listOfNameOfDrawerItem = [
+  static const List<String> listOfDrawerItem = [
     firstItemInDrawer,
     secondItemInDrawer,
     thirstItemInDrawer,
     fourItemInDrawer,
+  ];
+  static const List<List<String>> listOfNameProduct = [
+    listOfNameProductChapter,
+    listFrequentlyPurchased,
+    listOfDiscount,
   ];
 }

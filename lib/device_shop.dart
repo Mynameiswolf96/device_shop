@@ -1,8 +1,11 @@
+import 'package:device_shop/app.dart';
 import 'package:device_shop/drawerMenu/drawer.dart';
 import 'package:device_shop/utils/colors/app_colors.dart';
+import 'package:device_shop/utils/texts/app_description.dart';
 import 'package:device_shop/utils/texts/app_images.dart';
 import 'package:device_shop/utils/texts/app_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DeviceShop extends StatelessWidget {
   const DeviceShop({super.key});
@@ -35,14 +38,14 @@ class DeviceShop extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 200,
-                  child: CatalogOfProducts(),
+                  child: CatalogProducts(),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 CatalogRowWidget(
                   icon: Icons.local_fire_department,
-                  titleName: AppText.nameOfFrequentlyPurchasedCatalog,
+                  titleName: AppText.frequentlyPurchasedCatalog,
                   listOFWidgetProduct: listOFWidgetProductOftenBuy,
                 ),
                 const SizedBox(
@@ -50,8 +53,8 @@ class DeviceShop extends StatelessWidget {
                 ),
                 CatalogRowWidget(
                   icon: Icons.percent,
-                  titleName: AppText.nameOfDiscountCatalog,
-                  listOFWidgetProduct: listOFWidgetOfDiscountProduct,
+                  titleName: AppText.discountCatalog,
+                  listOFWidgetProduct: listOFDiscountProduct,
                 ),
               ],
             ),
@@ -68,23 +71,20 @@ class SearchString extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
     return Container(
       margin: const EdgeInsets.only(left: 15),
       width: screenSize.width,
       height: 35,
       color: AppColor.grey,
       padding: const EdgeInsets.only(left: 15),
-      child: Row(
+      child: const Row(
         children: [
-          Container(
-            height: 35,
-            color: AppColor.grey,
-            child: const Icon(Icons.search),
-          ),
-          const Expanded(
+          Expanded(
             child: TextField(
               cursorHeight: 30,
               decoration: InputDecoration(
+                icon: Icon(Icons.search),
                 hintText: AppText.searchInCatalog,
                 hintStyle: TextStyle(
                   color: AppColor.white,
@@ -107,10 +107,13 @@ class WidgetProduct extends StatelessWidget {
   final String productName;
   final String imageName;
   final ProductImageSize imageSize;
+  final VoidCallback onTap;
+
 
   const WidgetProduct({
     required this.productName,
     required this.imageName,
+    required this.onTap,
     this.imageSize = ProductImageSize.small,
     super.key,
   });
@@ -121,11 +124,14 @@ class WidgetProduct extends StatelessWidget {
 
     return Column(
       children: [
-        Image.asset(
-          imageName,
-          fit: BoxFit.contain,
-          height: screenSize.width *
-              (imageSize.index == ProductImageSize.small.index ? 0.15 : 0.25),
+        GestureDetector(
+          onTap: onTap,
+          child: Image.asset(
+            imageName,
+            fit: BoxFit.contain,
+            height: screenSize.width *
+                (imageSize.index == ProductImageSize.small.index ? 0.15 : 0.25),
+          ),
         ),
         Text(
           maxLines: 2,
@@ -142,8 +148,8 @@ class WidgetProduct extends StatelessWidget {
   }
 }
 
-class CatalogOfProducts extends StatelessWidget {
-  const CatalogOfProducts({super.key});
+class CatalogProducts extends StatelessWidget {
+  const CatalogProducts({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -159,6 +165,16 @@ class CatalogOfProducts extends StatelessWidget {
         return WidgetProduct(
           productName: AppText.listOfNameProductChapter[index],
           imageName: AppImages.listOfImagesNameMain[index],
+          onTap: () {
+            context.go(
+              '/page_product',
+              extra: {
+                '0': AppText.listOfNameProductChapter[index],
+                '1': AppImages.listOfImagesNameMain[index],
+
+              },
+            );
+          },
         );
       },
     );
@@ -166,19 +182,39 @@ class CatalogOfProducts extends StatelessWidget {
 }
 
 List<Widget> listOFWidgetProductOftenBuy = List.generate(
-  AppText.listOfNameFrequentlyPurchased.length,
-      (index) => WidgetProduct(
-    productName: AppText.listOfNameFrequentlyPurchased[index],
+  AppText.listFrequentlyPurchased.length,
+  (index) => WidgetProduct(
+    productName: AppText.listFrequentlyPurchased[index],
     imageName: AppImages.listOFImagesNameOften[index],
     imageSize: ProductImageSize.big,
+    onTap: () {
+      App.ctx?.go(
+        '/page_product',
+        extra: {
+          '0': AppText.listFrequentlyPurchased[index],
+          '1': AppImages.listOFImagesNameOften[index],
+          '2': AppDescription.listOfDescriptionOften[index],
+        },
+      );
+    },
   ),
 );
-List<Widget> listOFWidgetOfDiscountProduct = List.generate(
-  AppText.listOfNameOfDiscount.length,
-      (index) => WidgetProduct(
-    productName: AppText.listOfNameOfDiscount[index],
+List<Widget> listOFDiscountProduct = List.generate(
+  AppText.listOfDiscount.length,
+  (index) => WidgetProduct(
+    productName: AppText.listOfDiscount[index],
     imageName: AppImages.listOfImagesDiscountsMain[index],
     imageSize: ProductImageSize.big,
+    onTap: () {
+      App.ctx?.go(
+        '/page_product',
+        extra: {
+          '0': AppText.listOfDiscount[index],
+          '1': AppImages.listOfImagesDiscountsMain[index],
+          '2': AppDescription.listOfDescriptionSale[index],
+        },
+      );
+    },
   ),
 );
 
@@ -216,7 +252,7 @@ class CatalogRowWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: listOFWidgetProduct.map(
-                  (e) {
+              (e) {
                 return SizedBox(
                   width: MediaQuery.of(context).size.width * .3,
                   child: e,
